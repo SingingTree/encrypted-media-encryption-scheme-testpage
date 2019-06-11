@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>encrypted-media-encryption-scheme Test Page</title>
+    <script type="text/javascript" src="script.js"></script>
+  </head>
+  <body>
+    <script>
+      window.onload = setupPage;
+    </script>
+    <div>
+      <p>
+        Select the keysystem and scheme(s) to request support for. The
+        supportedConfigurations will be displayed below and can be edited in
+        place before submitting. Note that interacting with the scheme
+        checkboxes will rebuild the request and remove any modifications.
+      </p>
+    </div>
+
+    <div>
+      <h4>Keysystem</h4>
+      <div>
+        <input type="radio" id="clearkey" name="keysystem" checked>
+        <label for="clearkey">org.w3.clearkey</label>
+      </div>
+      <div>
+        <input type="radio" id="playready" name="keysystem">
+        <label for="playready">com.microsoft.playready</label>
+      </div>
+      <div>
+        <input type="radio" id="widevine" name="keysystem">
+        <label for="widevine">com.widevine.alpha</label>
+      </div>
+    </div>
+
+    <div>
+        <h4>Protection scheme</h4>
+        <div>
+          <input type="checkbox" id="cenc" name="scheme">
+          <label for="cenc">cenc</label>
+        </div>
+        <div>
+          <input type="checkbox" id="cbcs" name="scheme">
+          <label for="cbcs">cbcs</label>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <h4>supportedConfigurations:</h4>
+      <div>
+        <textarea id="supportedConfigurations"></textarea>
+      </div>
+      <div>
+        <button id="requestAccess">navigator.requestMediaKeySystemAccess()</button>
+      </div>
+    </div>
+    <div>
+      <h4>mediaKeySystemAccess.getConifuration / error</h4>
+      <div>
+        <textarea id="response"></textarea>
+      </div>
+    </div>
+  </body>
+</html>
