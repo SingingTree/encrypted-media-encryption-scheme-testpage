@@ -10,8 +10,18 @@ function setupPage() { // eslint-disable-line no-unused-vars
   let supportedConfigurationsText =
       document.getElementById("supportedConfigurations");
 
+  // Response/error text area
+  let responseText = document.getElementById("response");
+
+  // Used to grow text areas so users don't have to manually resize
+  function growTextArea(textArea) {
+    textArea.style.height = "5px"; // Make sure the area shrinks if needed.
+    textArea.style.height = textArea.scrollHeight + "px"; // Grow as needed.
+  }
+
   /**
-  * Builds the 
+  * Builds the supported configurations JSON and populates the
+  * supportedConfigurationsText text area with it.
   */
   function buildSupportedConfigurations() {
     // Hardcode robustness and contentType as these aren't what we're testing.
@@ -50,6 +60,7 @@ function setupPage() { // eslint-disable-line no-unused-vars
 
     supportedConfigurationsText.value =
       JSON.stringify(mediaKeySystemConfig, null, 2);
+    growTextArea(supportedConfigurationsText);
   }
   
   async function submitRequest() {
@@ -63,7 +74,6 @@ function setupPage() { // eslint-disable-line no-unused-vars
                     widevine.checked ? "com.widevine.alpha" :
                     null;
 
-    let responseText = document.getElementById("response");
     let mediaKeySystemConfig =
       JSON.parse(supportedConfigurationsText.value);
 
@@ -75,6 +85,7 @@ function setupPage() { // eslint-disable-line no-unused-vars
       } catch (e) {
         responseText.value = e;
       }
+      growTextArea(responseText);
   }
 
   cenc.onclick = buildSupportedConfigurations;
@@ -82,4 +93,5 @@ function setupPage() { // eslint-disable-line no-unused-vars
 
   document.getElementById("requestAccess").onclick = submitRequest;
   buildSupportedConfigurations();
+  growTextArea(responseText);
 }
