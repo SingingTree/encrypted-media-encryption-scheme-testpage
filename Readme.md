@@ -16,16 +16,7 @@ To enable:
 
 ### Chrome
 
-enable-blink-features",
-        "EncryptedMediaEncryptionSchemeQuery,"
+This feature is now enabled in Chrome by default.
 
-Chrome's
-[tracking bug](https://bugs.chromium.org/p/chromium/issues/detail?id=838416)
-for this feature is hidden as of writing.
-
-To enable:
-- Start Chrome with the
-`--enable-blink-features=EncryptedMediaEncryptionSchemeQuery` flag. E.g.
-`chrome --enable-blink-features=EncryptedMediaEncryptionSchemeQuery`. Ensure
-running instances of Chrome are shutdown in order to start a fresh one with
-the feature enabled.
+For more info, see Chrome's
+[tracking bug](https://bugs.chromium.org/p/chromium/issues/detail?id=838416).

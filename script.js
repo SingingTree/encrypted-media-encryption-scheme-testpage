@@ -5,6 +5,8 @@ function setupPage() { // eslint-disable-line no-unused-vars
   // Scheme selection check boxes
   let cenc = document.getElementById("cenc");
   let cbcs = document.getElementById("cbcs");
+  let cbcsOneNine = document.getElementById("cbcs-1-9");
+  let garbage = document.getElementById("garbage");
 
   // Supported configurations text area
   let supportedConfigurationsText =
@@ -34,7 +36,8 @@ function setupPage() { // eslint-disable-line no-unused-vars
       // We add video caps below
     };
 
-    if (!cenc.checked && !cbcs.checked) {
+    if (!cenc.checked && !cbcs.checked &&
+        !cbcsOneNine.checked && !garbage.checked) {
       // No scheme selected, build without
       mediaKeySystemConfig.videoCapabilities = [{
        "robustness": robustness,
@@ -54,6 +57,20 @@ function setupPage() { // eslint-disable-line no-unused-vars
           "robustness": robustness,
           "contentType": contentType,
           "encryptionScheme": "cbcs",
+        });
+      }
+      if (cbcsOneNine.checked) {
+        mediaKeySystemConfig.videoCapabilities.push({
+          "robustness": robustness,
+          "contentType": contentType,
+          "encryptionScheme": "cbcs-1-9",
+        });
+      }
+      if (garbage.checked) {
+        mediaKeySystemConfig.videoCapabilities.push({
+          "robustness": robustness,
+          "contentType": contentType,
+          "encryptionScheme": "garbage",
         });
       }
     }
@@ -90,6 +107,8 @@ function setupPage() { // eslint-disable-line no-unused-vars
 
   cenc.onclick = buildSupportedConfigurations;
   cbcs.onclick = buildSupportedConfigurations;
+  cbcsOneNine.onclick = buildSupportedConfigurations;
+  garbage.onclick= buildSupportedConfigurations;
 
   document.getElementById("requestAccess").onclick = submitRequest;
   buildSupportedConfigurations();
